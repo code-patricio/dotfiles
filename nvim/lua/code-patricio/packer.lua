@@ -20,7 +20,8 @@ return require('packer').startup(function(use)
 	use {'mbbill/undotree'}
 
 	use({'jakewvincent/mkdnflow.nvim'})
-
+    
+    use {'theprimeagen/vim-be-good'}
 
 --[[ 
 -- Not Lsp Zero
