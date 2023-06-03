@@ -1,25 +1,15 @@
 # Personal dotfiles
-> sorry for awful english 
 
 ## neovim 
-I follow the @theprimeagen tutorial and keep what I use.
+following the @theprimeagen tutorial(2023) and keeping what i liked
 
 ## termux 
 Just a colorscheme(catpuccin) and 2 lines in termux.properties
 
 ## arch
-i dont used archlinux for a while and i forget almost everything lol
-1. list-pkg(automated)
-2. suckless(for fun, use C btw):
-	1.dwm
-	2.st
-3. xorg(.xserver, .xinit, some other rc file lol)
-4. audio, video and documents viewer
-5. tor-browser()
-6. openssh(im still using termux and i dont want to upload my notes in github)
+i have no personal computer for the moment but i found old hdd
 
-TODO
-* [X] ~~termux~~
-* [ ] bashrc
-* [ ] xdg
-* [ ] arch-install 
+1. suckless(dwm, dmenu, st) --default
+2. xorg(some oldgraphs issue)
+3. audio, video and documents viewer(cmus, mpv, zathura)
+4. browser(tor-browser, firefox) --idk

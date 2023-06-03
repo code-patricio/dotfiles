@@ -1,0 +1,33 @@
+# pacstrap pkgs
+
+linux linux-firmware base base-devel grub nano man-db git stow
+networkmanager netctl wpa_supplicant dialog
+
+## xorg and suckless
+
+xorg-server xorg-xinit xorg-apps --for quick install("xorg")
+intel-ucode --idk 
+libx11 libxinerama libxft libxrandr --dependecies for suckless
+mesa mesa-vdpau opengl-man-pages  --openGL stuff
+
+* xf86-video-intel --old graphics driver
+* mesa-amber --old opengl 2.*
+
+## neovim
+
+https://github.com/neovim/neovim
+base-devel cmake unzip ninja curl --dependecies
+
+--make dir for the plugin manager and git clone
+~/.local/share/neovim/site/pack/packer/start/packer.nvim
+https://github.com/wbthomason/packer.nvim\ 
+
+### git clone links
+
+https://github.com/code-patricio/dotfiles
+https://github.com/code-patricio/scripts
+https://git.suckless.org/dwm
+https://git.suckless.org/dmenu
+https://git.suckless.org/st
+
+
