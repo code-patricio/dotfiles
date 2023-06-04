@@ -31,7 +31,7 @@ vim.keymap.set("v", "<leader>d", "\"_d")
 vim.keymap.set("n", "Q", "<nop>")
 
 -- C compiler
-vim.keymap.set("n", "<leader>x", "<cmd>!gcc %<CR>")
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>")
 
 
 --[[
