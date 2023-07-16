@@ -23,6 +23,8 @@ return require('packer').startup(function(use)
     
     use {'theprimeagen/vim-be-good'}
 
+    use {'jbyuki/venn.nvim'}
+
 --[[ 
 -- Not Lsp Zero
     use{"williamboman/mason.nvim", run = ":MasonUpdate" }
