@@ -10,7 +10,8 @@ intel-ucode --idk
 libx11 libxinerama libxft libxrandr --dependecies for suckless
 mesa mesa-vdpau opengl-man-pages  --openGL stuff
 
-* xf86-video-intel --old graphics driver
+xf86-video-intel --old graphics driver
+
 * mesa-amber --old opengl 2.*
 
 ## neovim
@@ -20,7 +21,7 @@ base-devel cmake unzip ninja curl --dependecies
 
 --make dir for the plugin manager and git clone
 ~/.local/share/neovim/site/pack/packer/start/packer.nvim
-https://github.com/wbthomason/packer.nvim\ 
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\ 
 
 ### git clone links
 
@@ -30,4 +31,8 @@ https://git.suckless.org/dwm
 https://git.suckless.org/dmenu
 https://git.suckless.org/st
 
+### utils
 
+firefox fonts
+tmux zathura cmus 
+yt-dlp mvp 
