@@ -10,7 +10,7 @@ intel-ucode --idk
 libx11 libxinerama libxft libxrandr --dependecies for suckless
 mesa mesa-vdpau opengl-man-pages  --openGL stuff
 
-xf86-video-intel --old graphics driver
+xf86-video-intel --old graphics driver("startx doesnt work without")
 
 * mesa-amber --old opengl 2.*
 
@@ -33,6 +33,9 @@ https://git.suckless.org/st
 
 ### utils
 
-firefox fonts
-tmux zathura cmus 
-yt-dlp mvp 
+firefox 
+fonts --
+tmux 
+cmus yt-dlp ffmpeg 
+zathura 
+
