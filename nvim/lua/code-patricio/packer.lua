@@ -9,13 +9,15 @@ return require('packer').startup(function(use)
    
     use { "catppuccin/nvim", as = "catppuccin" }
 
---    use {'nvim-treesitter/nvim-treesitter'}
+    use({'jakewvincent/mkdnflow.nvim'})
 
 	use {'mbbill/undotree'}
 
-	use({'jakewvincent/mkdnflow.nvim'})
-    
-    use {'jbyuki/venn.nvim'}
+--    use {'nvim-treesitter/nvim-treesitter'}
+            
+--    use {'jbyuki/venn.nvim'}
+
+--    use {'mipmip/vim-scimark'}
 
 --    use {'theprimeagen/vim-be-good'}
 

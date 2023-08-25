@@ -34,9 +34,9 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>")
 
 
---[[
+-- Markdown templates
 
-vim.keymap.set("n", "tex", ":-1read $HOME/scripts/latex/test.tex<CR>")
+vim.keymap.set("n", "week", ":-1read $HOME/scripts/snippets/markdown/week.md<CR>jllli")
 
 
 
