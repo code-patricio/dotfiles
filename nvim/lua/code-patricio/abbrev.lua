@@ -1,3 +1,12 @@
+vim.cmd[[iabbrev ' ''<Left>]]
+vim.cmd[[iabbrev " ""<Left>]]
+vim.cmd[[iabbrev ( ()<Left>]]
+vim.cmd[[iabbrev { {<CR><CR>}<Up><Tab>]]
+vim.cmd[[iabbrev ` ``<Left>]]
+vim.cmd[[iabbrev ´ ´´<Left>]]
+
+vim.cmd[[autocmd Filetype c iabbrev pf printf("");<Left><Left><Left>]]
+vim.cmd[[autocmd Filetype c iabbrev inc #include <><Left>]]
 
 vim.cmd[[autocmd FileType html iabbrev htmls <!DOCTYPE html><CR><Tab><body><CR><CR><\body><Up>]]
     
@@ -5,3 +14,5 @@ vim.cmd[[autocmd FileType html iabbrev htmls <!DOCTYPE html><CR><Tab><body><CR><
     
 vim.cmd[[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]]
 vim.cmd[[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]]
+
+

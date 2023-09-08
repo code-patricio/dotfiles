@@ -1,6 +1,6 @@
 require("catppuccin").setup({
 
-flavour = "frappe",
+flavour = "macchiato",
 
 })
 
