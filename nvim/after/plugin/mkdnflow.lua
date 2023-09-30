@@ -1,4 +1,4 @@
-require('mkdnflow').setup({
+require('mkdnflow').init({
      -- Config goes here; leave blank for defaults
 perspective = {
         priority = 'root',
