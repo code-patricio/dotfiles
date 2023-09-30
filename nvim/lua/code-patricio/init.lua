@@ -1,5 +1,6 @@
 require("code-patricio.set")
 require("code-patricio.remap")
+require("code-patricio.lazy")
 require("code-patricio.abbrev")
 
 local lazypath = vim.fn.stdpath("data") .. "lazy/lazy.nvim"
