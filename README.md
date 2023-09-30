@@ -1,15 +1,15 @@
 # Personal dotfiles
 
 ## neovim 
-following the @theprimeagen tutorial(2023) and keeping what i liked
+Lazy.nvim make me change everything. Now is just a long "init.lua" file.
 
-## termux 
-Just a colorscheme(catpuccin) and 2 lines in termux.properties
+* Plugins:
 
-## arch
-i have no personal computer for the moment but i found old hdd
+    - mkdnflow = Modern "vimwiki"
+    - vim-fugitive = Sir Tpope!
+    - and more? idk
 
-1. suckless(dwm, dmenu, st) --default
-2. xorg(some oldgraphs issue)
-3. audio, video and documents viewer(cmus, mpv, zathura)
-4. browser(tor-browser, firefox) --idk
+* Options and Remaps:
+
+I do not understand the "register" thing so i delete those.
+Same with some options like the "updatetime"

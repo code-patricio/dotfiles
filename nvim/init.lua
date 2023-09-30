@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -46,7 +48,6 @@ require("lazy").setup({
 -- ## remap options ##
 -- ###################
 
-vim.g.mapleader = " "
 
 -- Move v selected lines
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -91,6 +92,7 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 vim.opt.autoindent = true
+vim.opt.breakindent = true
 
 vim.opt.wrap = false
 
@@ -102,15 +104,21 @@ vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
 
---vim.opt.updatetime = 50
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+
+vim.opt.completeopt = "menuone,noselect"
 
 vim.opt.colorcolumn = "80"
+
 
 -- If you have an init.lua
 vim.api.nvim_create_autocmd("FileType", {pattern = "markdown", command = "set awa"})
