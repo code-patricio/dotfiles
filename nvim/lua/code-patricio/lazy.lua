@@ -13,8 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 requiere("lazy").setup({
 
-	"jakewvincent/mkdnflow.nvim"
+	"jakewvincent/mkdnflow.nvim",
 
-	"tpope/vim-fugitive"
+	"tpope/vim-fugitive",
 
 })
