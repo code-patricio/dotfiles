@@ -20,7 +20,7 @@ require("lazy").setup({
         config = function()
 		require('mkdnflow').setup({
 			-- Config goes here; leave blank for defaults
-			perspective = {
+		perspective = {
 				priority = 'root',
 				root_tell = 'index.md',
 				fallback = 'current'
@@ -41,6 +41,8 @@ require("lazy").setup({
     },
 
 	"tpope/vim-fugitive",
+
+    "nvim-lua/plenary.nvim",
 
 })
 
