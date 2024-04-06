@@ -21,7 +21,7 @@ require("lazy").setup({
 		require('mkdnflow').setup({
 			-- Config goes here; leave blank for defaults
 		perspective = {
-				priority = 'root',
+			priority = 'root',
 				root_tell = 'index.md',
 				fallback = 'current'
 			},
@@ -42,9 +42,27 @@ require("lazy").setup({
 
 	"tpope/vim-fugitive",
 
-    "nvim-lua/plenary.nvim",
+	"nvim-lua/plenary.nvim",
 
+	{
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+	},
+
+	{
+		"titanzero/zephyrium",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
+		config = function()
+			-- load the colorscheme here
+			vim.cmd([[colorscheme zephyrium]])
+		end,
+	},
 })
+
+require("mason").setup()
+require("mason-lspconfig").setup()
 
 -- ###################
 -- ## remap options ##
