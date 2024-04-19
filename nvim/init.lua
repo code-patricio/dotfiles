@@ -20,6 +20,14 @@ require("lazy").setup({
 --[[
 --]]
     {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000
+    },
+
+--[[
+--]]
+    {
         "jakewvincent/mkdnflow.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim"
@@ -215,4 +223,7 @@ vim.opt.splitbelow = true
 vim.cmd [[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]]
 vim.cmd [[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]]
 
-vim.cmd("colorscheme zaibatsu")
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 30
+
+vim.cmd.colorscheme "catppuccin-frappe"

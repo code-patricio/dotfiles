@@ -1,6 +1,6 @@
 # pacstrap pkgs
 
-linux linux-firmware base base-devel grub nano man-db git stow
+linux linux-firmware base base-devel grub vi man-db git stow
 networkmanager netctl wpa_supplicant dialog
 
 ## xorg and suckless
@@ -12,16 +12,10 @@ mesa mesa-vdpau opengl-man-pages  --openGL stuff
 
 xf86-video-intel --old graphics driver("startx doesnt work without")
 
-* mesa-amber --old opengl 2.*
-
 ## neovim
 
 https://github.com/neovim/neovim
 base-devel cmake unzip ninja curl --dependecies
-
---make dir for the plugin manager and git clone
-~/.local/share/neovim/site/pack/packer/start/packer.nvim
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\ 
 
 ### git clone links
 
@@ -33,9 +27,9 @@ https://git.suckless.org/st
 
 ### utils
 
-firefox 
-fonts --
+noto-fonts-cjk ttf-jetbrains-mono
 tmux 
-cmus yt-dlp ffmpeg 
+yt-dlp ffmpeg mpv
+firefox 
 zathura 
 
