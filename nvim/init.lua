@@ -1,5 +1,83 @@
 vim.g.mapleader = " "
 
+-- ## set options ##
+
+vim.opt.guicursor = ""
+
+vim.opt.nu = true
+vim.opt.relativenumber = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
+vim.opt.autoindent = true
+vim.opt.breakindent = true
+
+vim.opt.wrap = false
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
+vim.opt.undofile = true
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 500
+
+vim.opt.completeopt = "menuone,noselect"
+
+vim.opt.colorcolumn = "80"
+vim.opt.cursorline = true
+vim.opt.cursorcolumn = true
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
+
+-- ## remap options ##
+
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+
+vim.keymap.set("n", "J", "mzJ`z")
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>Y", "\"+Y")
+
+vim.keymap.set("n", "Q", "<nop>")
+
+vim.keymap.set("n", "<leader>bn", ":bnext<CR>")
+vim.keymap.set("n", "<leader>bp", ":bprevious<CR>")
+
+--vim.keymap.set("n", "week", ":-1read $HOME/scripts/snippets/markdown/week.md<CR>jllli")
+
 -- ## Lazy.nvim ##
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -17,7 +95,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 
---[[
+    --[[
 --]]
     {
         "catppuccin/nvim",
@@ -25,7 +103,20 @@ require("lazy").setup({
         priority = 1000
     },
 
---[[
+    --[[
+--]]
+    {
+        "mbbill/undotree",
+        config = function()
+            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+        end
+    },
+
+    {
+        "ThePrimeagen/vim-be-good",
+    },
+
+    --[[
 --]]
     {
         "jakewvincent/mkdnflow.nvim",
@@ -47,13 +138,19 @@ require("lazy").setup({
                 },
             })
             vim.api.nvim_create_autocmd("FileType", {
-                pattern = "markdown", 
-                command = "set awa" 
+                pattern = "markdown",
+                command = "set awa"
             })
         end
     },
 
---[[
+    {
+        "tpope/vim-fugitive",
+        config = function()
+            vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+        end
+    },
+    --[[
 --]]
     {
         "nvim-treesitter/nvim-treesitter",
@@ -61,7 +158,7 @@ require("lazy").setup({
         config = function()
             local configs = require("nvim-treesitter.configs")
             configs.setup({
-                ensure_installed = { "vim", "vimdoc", "lua", "go" },
+                ensure_installed = { "vim", "vimdoc", "lua", "go", "c" },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
@@ -69,7 +166,7 @@ require("lazy").setup({
         end
     },
 
---[[
+    --[[
 --]]
     {
         "neovim/nvim-lspconfig",
@@ -80,9 +177,9 @@ require("lazy").setup({
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "gopls"
+                ensure_installed = {
+                    "lua_ls",
+                    "gopls"
                 },
             })
 
@@ -123,100 +220,48 @@ require("lazy").setup({
         end
     },
 
---[[
+    --[[
+--]]
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-cmdline',
-            'saadparwaiz1/cmp_luasnip',
-            'L3MON4D3/LuaSnip'
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lsp",
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
         },
         config = function()
+            local cmp = require 'cmp'
+            local luasnip = require 'luasnip'
+            luasnip.config.setup {}
+
+            cmp.setup {
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
+                },
+                mapping = cmp.mapping.preset.insert {
+                    ['<C-n>'] = cmp.mapping.select_next_item(),
+                    ['<C-p>'] = cmp.mapping.select_prev_item(),
+                    ['<C-y>'] = cmp.mapping.confirm { select = true },
+                    ['<C-Space>'] = cmp.mapping.complete {},
+                },
+                sources = cmp.config.sources({
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip' },
+                }, {
+                        { name = 'buffer' },
+                        { name = 'path' },
+                    })
+            }
         end
     },
---]]
 
-    "ThePrimeagen/vim-be-good"
 })
 
--- ## remap options ##
 
-
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-
-vim.keymap.set("n", "J", "mzJ`z")
-
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
-
-vim.keymap.set("n", "Q", "<nop>")
-
---vim.keymap.set("n", "week", ":-1read $HOME/scripts/snippets/markdown/week.md<CR>jllli")
-
--- ## set options ##
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
-
-vim.opt.guicursor = ""
-
-vim.opt.nu = true
-vim.opt.relativenumber = true
-
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
-vim.opt.smartindent = true
-vim.opt.autoindent = true
-vim.opt.breakindent = true
-
-vim.opt.wrap = false
-
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
-vim.opt.undofile = true
-
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
-
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
-vim.opt.termguicolors = true
-
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
-
-vim.opt.completeopt = "menuone,noselect"
-
-vim.opt.colorcolumn = "80"
-vim.opt.cursorline = true
-vim.opt.cursorcolumn = true
-
-vim.opt.splitright = true
-vim.opt.splitbelow = true
 
 -- ## abbrev options ##
 
@@ -224,6 +269,5 @@ vim.cmd [[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')
 vim.cmd [[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]]
 
 vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 30
 
 vim.cmd.colorscheme "catppuccin-frappe"

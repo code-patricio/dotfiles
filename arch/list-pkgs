@@ -1,36 +1,3 @@
-# pacstrap pkgs
-
-linux linux-firmware base base-devel grub vi man-db git stow
-networkmanager netctl wpa_supplicant dialog
-
-## xorg and suckless
-
-xorg-server xorg-xinit xorg-apps --for quick install("xorg")
-intel-ucode --idk 
-libx11 libxinerama libxft libxrandr --dependecies for suckless
-mesa mesa-vdpau opengl-man-pages  --openGL stuff
-
-xf86-video-intel --old graphics driver("startx doesnt work without")
-
-## neovim
-
-https://github.com/neovim/neovim
-base-devel cmake unzip ninja curl --dependecies
-
-### git clone links
-
-https://github.com/code-patricio/dotfiles
-https://github.com/code-patricio/scripts
-https://git.suckless.org/dwm
-https://git.suckless.org/dmenu
-https://git.suckless.org/st
-https://git.suckless.org/tabbed
-
-### utils
-
-ttf-jetbrains-mono
-tmux 
-alsa-utils pipewire-alsa yt-dlp ffmpeg mpv 
-zathura 
-sxiv
-w3m
+xorg-server xorg-xinit libx11 libxinerama libxft libxrandr
+xf86-video-intel mesa opengl-man-pages
+w3m sxiv

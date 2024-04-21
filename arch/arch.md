@@ -22,7 +22,8 @@ mount sd#1 /mnt/boot
 mkdir /mnt/home
 mount sd#3 /mnt/home
 
-pacstrap -K /mnt
+pacstrap -K /mnt linux linux-firmware base base-devel intel-ucode grub vi man-db git stow
+networkmanager netctl wpa_supplicant dialog 
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -32,7 +33,7 @@ ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 hwclock --systohc
 
 nvim /etc/locale.gen
-    en_US
+    es_AR
 locale.gen
 
 nvim /etc/vconsole.conf
@@ -43,6 +44,7 @@ nvim /etc/vconsole.conf
 
 mkinitcpio -P
 
+arch-chroot - /mnt
 passwd
 
 useradd -m @
@@ -59,10 +61,11 @@ rmmod floppy
 grub-install /dev/sd#
 grub-mkconfig -o /boot/grub/grub.cfg
 
-## reboot
+exit
+umount -U /mnt
+reboot
 
 ip link set DEVICE up
 systemctl start NetworkManager.service
 nmcli dev wifi connect SSID password passwd
-
 
