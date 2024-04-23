@@ -47,8 +47,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    group = vim.api.nvim_create_augroup('highlight_yank', { clear = true }),
     callback = function()
         vim.highlight.on_yank()
     end,
@@ -98,9 +97,10 @@ require("lazy").setup({
     --[[
 --]]
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        priority = 1000
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
     },
 
     --[[
@@ -150,6 +150,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
         end
     },
+
     --[[
 --]]
     {
@@ -158,7 +159,7 @@ require("lazy").setup({
         config = function()
             local configs = require("nvim-treesitter.configs")
             configs.setup({
-                ensure_installed = { "vim", "vimdoc", "lua", "go", "c" },
+                ensure_installed = { "vim", "vimdoc", "lua", "go", "c", "markdown" },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
@@ -179,17 +180,19 @@ require("lazy").setup({
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "lua_ls",
-                    "gopls"
+                    "gopls",
+                    "zls"
                 },
             })
 
             require("lspconfig").lua_ls.setup {}
             require("lspconfig").gopls.setup {}
+            require("lspconfig").zls.setup {}
 
-            vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-            vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-            vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-            vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+--           vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+--           vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+--           vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+--           vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -200,17 +203,17 @@ require("lazy").setup({
                     local opts = { buffer = ev.buf }
                     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
                     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-                    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-                    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-                    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-                    vim.keymap.set('n', '<space>wl', function()
-                        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                    end, opts)
-                    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-                    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+--                  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+--                  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+--                  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+--                  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+--                  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+--                  vim.keymap.set('n', '<space>wl', function()
+--                      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+--                  end, opts)
+--                  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+--                  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+--                  vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
                     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
                     vim.keymap.set('n', '<space>f', function()
                         vim.lsp.buf.format { async = true }
@@ -221,7 +224,6 @@ require("lazy").setup({
     },
 
     --[[
---]]
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -258,6 +260,7 @@ require("lazy").setup({
             }
         end
     },
+--]]
 
 })
 
@@ -268,6 +271,4 @@ require("lazy").setup({
 vim.cmd [[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]]
 vim.cmd [[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]]
 
-vim.g.netrw_banner = 0
-
-vim.cmd.colorscheme "catppuccin-frappe"
+vim.cmd.colorscheme{"tokyonight"}
