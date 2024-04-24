@@ -159,7 +159,7 @@ require("lazy").setup({
         config = function()
             local configs = require("nvim-treesitter.configs")
             configs.setup({
-                ensure_installed = { "vim", "vimdoc", "lua", "go", "c", "markdown" },
+                ensure_installed = { "vim", "vimdoc", "lua", "go", "c", "zig" },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
@@ -212,7 +212,7 @@ require("lazy").setup({
 --                      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 --                  end, opts)
 --                  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
---                  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+                    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
 --                  vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
                     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
                     vim.keymap.set('n', '<space>f', function()
@@ -271,4 +271,4 @@ require("lazy").setup({
 vim.cmd [[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]]
 vim.cmd [[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]]
 
-vim.cmd.colorscheme{"tokyonight"}
+vim.cmd.colorscheme{"tokyonight-night"}
