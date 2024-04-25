@@ -203,7 +203,7 @@ require("lazy").setup({
                     local opts = { buffer = ev.buf }
                     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
                     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
---                  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 --                  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 --                  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 --                  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
@@ -272,3 +272,5 @@ vim.cmd [[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')
 vim.cmd [[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]]
 
 vim.cmd.colorscheme{"tokyonight-night"}
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.cmd('highlight SignColumn guibg=#000000')
