@@ -2,8 +2,6 @@ vim.g.mapleader = " "
 
 -- ## set options ##
 
-vim.opt.guicursor = ""
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -32,12 +30,11 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
 
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 500
+--vim.opt.updatetime = 250
+--vim.opt.timeoutlen = 500
 
-vim.opt.completeopt = "menuone,noselect"
+vim.opt.completeopt = "menu,menuone,noinsert"
 
 vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
@@ -47,11 +44,13 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('highlight_yank', { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
+vim.cmd.colorscheme{"vim"}
 
 -- ## remap options ##
 
@@ -95,29 +94,21 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 
     --[[
---]]
+    --]]
     {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
+        "ThePrimeagen/vim-be-good"
     },
 
     --[[
---]]
     {
         "mbbill/undotree",
         config = function()
             vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
         end
     },
-
-    {
-        "ThePrimeagen/vim-be-good",
-    },
+--]]
 
     --[[
---]]
     {
         "jakewvincent/mkdnflow.nvim",
         dependencies = {
@@ -143,16 +134,18 @@ require("lazy").setup({
             })
         end
     },
+--]]
 
+    --[[
     {
         "tpope/vim-fugitive",
         config = function()
             vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
         end
     },
+--]]
 
     --[[
---]]
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -166,9 +159,9 @@ require("lazy").setup({
             })
         end
     },
+--]]
 
     --[[
---]]
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -222,6 +215,7 @@ require("lazy").setup({
             })
         end
     },
+--]]
 
     --[[
     {
@@ -271,6 +265,3 @@ require("lazy").setup({
 vim.cmd [[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]]
 vim.cmd [[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]]
 
-vim.cmd.colorscheme{"tokyonight-night"}
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.cmd('highlight SignColumn guibg=#000000')
