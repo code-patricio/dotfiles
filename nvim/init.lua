@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
-
--- ## set options ##
+vim.cmd.colorscheme{"vim"}
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -50,7 +49,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
-vim.cmd.colorscheme{"vim"}
 
 -- ## remap options ##
 
@@ -94,21 +92,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 
     --[[
-    --]]
+--]]
     {
         "ThePrimeagen/vim-be-good"
     },
 
-    --[[
-    {
-        "mbbill/undotree",
-        config = function()
-            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-        end
-    },
---]]
-
-    --[[
+--[[
     {
         "jakewvincent/mkdnflow.nvim",
         dependencies = {
@@ -117,8 +106,8 @@ require("lazy").setup({
         config = function()
             require('mkdnflow').setup({
                 perspective = {
-                    priority = 'root',
                     root_tell = 'index.md',
+                    priority = 'root',
                 },
                 links = {
                     transform_explicit = function(text)
@@ -128,19 +117,17 @@ require("lazy").setup({
                     end
                 },
             })
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = "markdown",
-                command = "set awa"
-            })
+            --Use the following if your buffer is set to become hidden
+            --vim.api.nvim_create_autocmd("BufLeave", {pattern = "*.md", command = "silent! wall"})
         end
     },
 --]]
 
     --[[
     {
-        "tpope/vim-fugitive",
+        "mbbill/undotree",
         config = function()
-            vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
         end
     },
 --]]
@@ -257,10 +244,6 @@ require("lazy").setup({
 --]]
 
 })
-
-
-
--- ## abbrev options ##
 
 vim.cmd [[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]]
 vim.cmd [[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]]
