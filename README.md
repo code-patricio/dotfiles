@@ -8,7 +8,7 @@ Lazy.nvim make me change everything. Now is just a long "init.lua" file.
     - vim-be-good = Good to kill time
     - mkdnflow = Modern "vimwiki" in Lua
     - nvim-treesitter = Look a those HighLights
-    - undotree = Interactive undo 
+    - undotree = Interactive undo
         [] save undodir too?
     - nvim-lsp = gd gd gd gd gd gd
     - nvim-cmp = im magic

@@ -1,3 +1,5 @@
+-- ## opts ## --
+
 vim.g.mapleader = " "
 vim.cmd.colorscheme{"vim"}
 
@@ -13,7 +15,7 @@ vim.opt.smartindent = true
 vim.opt.autoindent = true
 vim.opt.breakindent = true
 
-vim.opt.wrap = false
+vim.opt.wrap = false 
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -36,6 +38,7 @@ vim.opt.scrolloff = 8
 vim.opt.completeopt = "menu,menuone,noinsert"
 
 vim.opt.colorcolumn = "80"
+vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 
@@ -52,8 +55,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- ## remap options ##
 
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
 
@@ -97,58 +100,64 @@ require("lazy").setup({
         "ThePrimeagen/vim-be-good"
     },
 
---[[
+    --[[
+--]]
     {
         "jakewvincent/mkdnflow.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim"
         },
         config = function()
-            require('mkdnflow').setup({
-                perspective = {
-                    root_tell = 'index.md',
-                    priority = 'root',
-                },
-                links = {
-                    transform_explicit = function(text)
-                        text = text:gsub(" ", "-")
-                        text = text:lower()
-                        return (text)
-                    end
-                },
-            })
+        require("mkdnflow").setup({
+            perspective = {
+                root_tell = "index.md",
+                priority = "root",
+            },
+            links = {
+                transform_explicit = function(text)
+                    text = text:gsub(" ", "-")
+                    text = text:lower()
+                    return (text)
+                end
+            },
             --Use the following if your buffer is set to become hidden
-            --vim.api.nvim_create_autocmd("BufLeave", {pattern = "*.md", command = "silent! wall"})
+            --vim.api.nvim_create_autocmd("BufLeave", {
+            --pattern = "*.md",
+            --command = "silent! wall"
+            --})
+            })
         end
     },
---]]
 
     --[[
+--]]
     {
         "mbbill/undotree",
         config = function()
             vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
         end
     },
---]]
 
     --[[
+--]]
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
             local configs = require("nvim-treesitter.configs")
             configs.setup({
-                ensure_installed = { "vim", "vimdoc", "lua", "go", "c", "zig" },
+                ensure_installed = { "c", "query", "vim", "vimdoc", "lua", 
+                    "markdown", "markdown_inline", "go", "zig", "bash"  
+                },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
             })
         end
     },
---]]
 
     --[[
+--]]
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -169,40 +178,39 @@ require("lazy").setup({
             require("lspconfig").gopls.setup {}
             require("lspconfig").zls.setup {}
 
---           vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
---           vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
---           vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
---           vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+            --           vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+            --           vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+            --           vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+            --           vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
-            vim.api.nvim_create_autocmd('LspAttach', {
-                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-                callback = function(ev)
-                    -- Enable completion triggered by <c-x><c-o>
-                    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+--           vim.api.nvim_create_autocmd('LspAttach', {
+--               group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+--               callback = function(ev)
+--                   -- Enable completion triggered by <c-x><c-o>
+--                   vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-                    local opts = { buffer = ev.buf }
-                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
---                  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
---                  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
---                  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
---                  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
---                  vim.keymap.set('n', '<space>wl', function()
---                      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
---                  end, opts)
---                  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-                    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
---                  vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-                    vim.keymap.set('n', '<space>f', function()
-                        vim.lsp.buf.format { async = true }
-                    end, opts)
-                end,
-            })
-        end
+--                   local opts = { buffer = ev.buf }
+--                   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+--                   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+--                   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+--                   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+--                   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+--                   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+--                   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+--                   vim.keymap.set('n', '<space>wl', function()
+--                       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+--                   end, opts)
+--                   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+--                   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+--                   vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+--                   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+--                   vim.keymap.set('n', '<space>f', function()
+--                       vim.lsp.buf.format { async = true }
+--                   end, opts)
+--               end,
+--           })
+       end
     },
---]]
 
     --[[
     {
@@ -244,7 +252,5 @@ require("lazy").setup({
 --]]
 
 })
-
-vim.cmd [[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]]
-vim.cmd [[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]]
-
+    vim.cmd([[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]])
+    vim.cmd([[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]])

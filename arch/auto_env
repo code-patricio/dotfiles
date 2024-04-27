@@ -1,5 +1,7 @@
-
-pacman -S xorg-server xorg-xinit libx11 libxinerama libxft libxrandr unzip ninja xf86-video-intel intel-ucode mesa opengl-man-pages alsa-utils pulseaudio-alsa ffmpeg mpv yt-dlp ttf-jetbrains-mono noto-fonts-cjk tmux xclip ripgrep zathura zathura-djvu zathura-pdf-mupdf firefox rust npm go
+pacman -S xorg-server xorg-xinit libx11 libxinerama libxft libxrandr xf86-video-intel intel-ucode mesa opengl-man-pages ttf-jetbrains-mono noto-fonts-cjk 
+firefox alsa-utils pipewire-alsa 
+unzip ninja cmake xclip rust npm go
+ffmpeg mpv yt-dlp zathura zathura-djvu zathura-pdf-mupdf 
 https://github.com/code-patricio/scripts
 mkdir builds
 cd builds
@@ -27,7 +29,4 @@ cd ../neovim
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make clean install
 cd ~/dotfiles
-cp arch/.xinitrc ~/.
-cp arch/.bashrc ~/.
-
 

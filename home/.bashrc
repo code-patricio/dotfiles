@@ -13,4 +13,4 @@ alias music='youtube-viewer -a'
 alias video='youtube-viewer -4'
 
 PS1='[\u@\h \W]\$ '
-##export PATH="$HOME/zig-0.12.0:$PATH"
+##export PATH="$HOME/zig-0.11.0:$PATH"
