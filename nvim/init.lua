@@ -1,7 +1,6 @@
 -- ## opts ## --
 
 vim.g.mapleader = " "
-vim.cmd.colorscheme{"vim"}
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -108,6 +107,8 @@ require("lazy").setup({
             "nvim-lua/plenary.nvim"
         },
         config = function()
+    vim.cmd([[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]])
+    vim.cmd([[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]])
         require("mkdnflow").setup({
             perspective = {
                 root_tell = "index.md",
@@ -252,5 +253,3 @@ require("lazy").setup({
 --]]
 
 })
-    vim.cmd([[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]])
-    vim.cmd([[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]])
