@@ -147,14 +147,24 @@ require("lazy").setup({
         config = function()
             local configs = require("nvim-treesitter.configs")
             configs.setup({
-                ensure_installed = { "c", "query", "vim", "vimdoc", "lua", 
-                    "markdown", "markdown_inline", "go", "zig", "bash"  
+                ensure_installed = { "c", "query", "vim", "vimdoc", "lua",
+                    "markdown", "markdown_inline", "go", "zig", "bash"
                 },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
             })
         end
+    },
+
+    --[[
+--]]
+    {
+        "nvim-java/nvim-java",
+        config = function()
+            require('java').setup()
+        end
+
     },
 
     --[[
@@ -171,13 +181,15 @@ require("lazy").setup({
                 ensure_installed = {
                     "lua_ls",
                     "gopls",
-                    "zls"
+                    "zls",
+                    "jdtls"
                 },
             })
 
             require("lspconfig").lua_ls.setup {}
             require("lspconfig").gopls.setup {}
             require("lspconfig").zls.setup {}
+            require("lspconfig").jdtls.setup {}
 
             --           vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
             --           vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
