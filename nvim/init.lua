@@ -1,5 +1,4 @@
 -- ## opts ## --
-
 vim.g.mapleader = " "
 
 vim.opt.nu = true
@@ -74,8 +73,6 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>")
 vim.keymap.set("n", "<leader>bp", ":bprevious<CR>")
 
---vim.keymap.set("n", "week", ":-1read $HOME/scripts/snippets/markdown/week.md<CR>jllli")
-
 -- ## Lazy.nvim ##
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -98,38 +95,6 @@ require("lazy").setup({
     {
         "ThePrimeagen/vim-be-good"
     },
-
-    --[[
---]]
-    {
-        "jakewvincent/mkdnflow.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim"
-        },
-        config = function()
-    vim.cmd([[autocmd FileType markdown iabbrev date <C-r>=strftime('%y/%m/%d')<CR>]])
-    vim.cmd([[autocmd FileType markdown iabbrev mddate <C-r>=strftime('%y%m%d-%H%M')<CR>]])
-        require("mkdnflow").setup({
-            perspective = {
-                root_tell = "index.md",
-                priority = "root",
-            },
-            links = {
-                transform_explicit = function(text)
-                    text = text:gsub(" ", "-")
-                    text = text:lower()
-                    return (text)
-                end
-            },
-            --Use the following if your buffer is set to become hidden
-            --vim.api.nvim_create_autocmd("BufLeave", {
-            --pattern = "*.md",
-            --command = "silent! wall"
-            --})
-            })
-        end
-    },
-
     --[[
 --]]
     {
@@ -147,24 +112,14 @@ require("lazy").setup({
         config = function()
             local configs = require("nvim-treesitter.configs")
             configs.setup({
-                ensure_installed = { "c", "query", "vim", "vimdoc", "lua",
-                    "markdown", "markdown_inline", "go", "zig", "bash"
+                ensure_installed = { "c", "query", "vim", "vimdoc", "lua", "markdown", "markdown_inline",
+                    "java"
                 },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
             })
         end
-    },
-
-    --[[
---]]
-    {
-        "nvim-java/nvim-java",
-        config = function()
-            require('java').setup()
-        end
-
     },
 
     --[[
@@ -178,18 +133,8 @@ require("lazy").setup({
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "lua_ls",
-                    "gopls",
-                    "zls",
-                    "jdtls"
-                },
+                ensure_installed = {},
             })
-
-            require("lspconfig").lua_ls.setup {}
-            require("lspconfig").gopls.setup {}
-            require("lspconfig").zls.setup {}
-            require("lspconfig").jdtls.setup {}
 
             --           vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
             --           vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
